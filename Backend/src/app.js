@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors());
 
 const connectDB = require("./config/database");
 
@@ -14,22 +16,22 @@ app.post("/signup", async (req, res) => {
     const { firstName, lastName, email, userName, password } = req.body;
 
     if (!firstName || !lastName || !email || !userName || !password) {
-      return res.status(400).send("All fields are required");
+      return res.status(400).json({ message: "All fields are required" });
     }
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      res.status(400).send("User already exists");
+      res.status(400).json({ message: "User already exists" });
     }
 
     const user = new User({ firstName, lastName, email, userName, password });
     // const user = new User(req.body);
 
     await user.save();
-    res.send("User added successfully");
+    res.json({ message: "User added successfully" });
   } catch (err) {
     console.log(err.message);
-    res.status(400).send("Something went wrong: " + err.message);
+    res.status(500).json({ message: "Something went wrong: " + err.message });
   }
 });
 
@@ -47,7 +49,7 @@ app.get("/user", async (req, res) => {
     res.status(400).send("Something went wrong: " + err.message);
   }
 });
-// aa
+
 connectDB()
   .then(() => {
     console.log("Database connected");
