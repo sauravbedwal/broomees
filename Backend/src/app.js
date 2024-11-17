@@ -47,7 +47,7 @@ app.get("/user", async (req, res) => {
     res.status(400).send("Something went wrong: " + err.message);
   }
 });
-
+// aa
 connectDB()
   .then(() => {
     console.log("Database connected");
