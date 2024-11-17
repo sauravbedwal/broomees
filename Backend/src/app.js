@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 app.use(cors(
   {
-    origin: ["https://broomees-ivory.vercel.app/"],
+    origin: ["https://broomees-ivory.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
   }
