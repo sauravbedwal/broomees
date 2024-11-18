@@ -1,16 +1,14 @@
-/* General Reset */
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
-/* Container */
 .container {
     display: flex;
     height: 100vh;
 }
 
-/* Left Section */
 .leftSide {
     flex: 1;
     position: relative;
@@ -32,7 +30,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20%;
+    justify-content: space-around;
     width: 92% ;
     height: 30%;
 }
@@ -52,7 +50,6 @@ body {
     opacity: 60%;
 }
 
-/* Right Section */
 .rightSide {
     flex: 1;
     padding: 40px;
@@ -92,6 +89,7 @@ form {
 .firstName-lastName {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
     /* margin-bottom: 15px; */
 }
 
@@ -112,3 +110,106 @@ input {
     cursor: pointer;
     font-weight: bold;
 }
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+    .leftSide {
+        height: 50vh;
+    }
+    .rightSide {
+        padding: 20px;
+    }
+}
+
+/* For phones (small screens) */
+@media (max-width: 768px) {
+    .leftbox-text h1 {
+        font-size: 1.5rem; 
+    }
+
+    .leftbox-text p {
+        font-size: 0.7rem; 
+        width: 80%; 
+    }
+
+    .signIn {
+        font-size: 0.9rem; 
+        padding: 8px 15px; 
+    }
+
+    input {
+        padding: 8px; 
+    }
+
+    .submit-btn {
+        font-size: 0.9rem; 
+        padding: 8px; 
+    }
+}
+
+
+/* For very small phones (extra small screens) */
+@media (max-width: 480px) {
+    .leftSide {
+        flex: 1;
+        position: relative;
+        height: 50%; 
+    }
+
+    .backgroundImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .leftbox-text {
+        position: absolute; 
+        bottom: 10%;
+        left: 5%;
+        right: 5%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+        border-radius: 5px;
+    }
+
+    .leftbox-text h1 {
+        font-size: 1.2rem; 
+        margin: 0;
+        opacity: 1;
+    }
+
+    .leftbox-text p {
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+        margin: 0;
+    }
+
+    .rightSide {
+        flex: 1;
+        padding: 15px;
+        background-color: #f8f9fd;
+    }
+
+    h2 {
+        font-size: 1.2rem; 
+    }
+
+    input {
+        font-size: 0.8rem; 
+    }
+
+    .submit-btn {
+        font-size: 0.9rem; 
+        padding: 10px;
+    }
+}
+
