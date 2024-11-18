@@ -3,9 +3,15 @@ const app = express();
 const cors = require("cors");
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://broomees-ji3x.vercel.app"], // Specify allowed origins
-    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
-    credentials: true, // Allow cookies if needed
+    origin: (origin, callback) => {
+      if (origin && origin.includes("broomees")) {
+        callback(null, true); // Allow this origin
+      } else {
+        callback(new Error("Not allowed by CORS")); // Reject others
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true, // Enable if using cookies or Authorization headers
   })
 );
 
