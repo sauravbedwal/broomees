@@ -5,11 +5,17 @@ const connectDB = require("./config/database");
 
 const User = require("./Models/user");
 
+// app.use(
+//   cors({
+//     origin: "https://broomees-ji3x.vercel.app",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
+
 app.use(
   cors({
-    origin: "https://broomees-ji3x.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    origin: "*",
   })
 );
 
@@ -40,27 +46,43 @@ app.use(
 
 app.use(express.json());
 
+const bcrypt = require("bcrypt");
+
+const validator = require("validator");
+
 app.get("/", (req, res) => {
   res.json("Hello");
 });
 
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   try {
     // console.log(req.body);
-
     const { firstName, lastName, email, userName, password } = req.body;
 
     if (!firstName || !lastName || !email || !userName || !password) {
       return res.status(400).json({ message: "All fields are required" });
+    } else if (!validator.isEmail(email)) {
+      return res.status(400).json({ message: "Email is not valid" });
+    } else if (!validator.isStrongPassword(password)) {
+      return res.status(400).json({ message: "Password is not Strong" });
     }
+
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       res.status(400).json({ message: "User already exists" });
     }
 
-    const user = new User({ firstName, lastName, email, userName, password });
-    // const user = new User(req.body);
+    const passwordHash = await bcrypt.hash(password, 10);
+    // console.log(passwordHash);
+
+    const user = new User({
+      firstName,
+      lastName,
+      email,
+      userName,
+      password: passwordHash,
+    });
 
     await user.save();
     res.json({ message: "User added successfully" });
@@ -70,7 +92,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.get("/user", async (req, res) => {
+app.get("/api/user", async (req, res) => {
   try {
     console.log("Fetching Users...");
     const users = await User.find({});
@@ -86,13 +108,6 @@ app.get("/user", async (req, res) => {
     res.status(400).json({ message: "Something went wrong" });
   }
 });
-
-// app.use("/", (err, req, res, next) => {
-//   if (err) {
-//     console.log(err.message);
-//     res.status(500).json({ message: "Something went wrong" });
-//   }
-// });
 
 connectDB()
   .then(() => {

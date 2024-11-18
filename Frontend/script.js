@@ -1,7 +1,7 @@
 document.getElementById("signup-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // Front-end Validation
+  // Validation
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirm-password").value;
 
@@ -18,7 +18,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
     password: password,
   };
 
-  console.log("formData", formData);
+  // console.log("formData", formData);
   try {
     const response = await fetch("https://broomees-xoi8.vercel.app/signup", {
       method: "POST",
@@ -37,7 +37,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
   }
 });
 
-// Fetch Users on Page Load
+// Fetch users on page load and we can see the result in console
 async function fetchUsers() {
   try {
     const response = await fetch("https://broomees-xoi8.vercel.app/user");
@@ -48,5 +48,4 @@ async function fetchUsers() {
   }
 }
 
-// Call fetchUsers when the page loads
 window.onload = fetchUsers;
