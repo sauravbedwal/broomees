@@ -40,13 +40,13 @@ app.get("/user", async (req, res) => {
     const users = await User.find({});
 
     if (users.length === 0) {
-      res.status(404).send("No User found");
+      res.status(404).json({ message: "No User found:  " + err.message });
     } else {
-      res.send(users);
+      res.json(users);
     }
   } catch (err) {
     console.log(err.message);
-    res.status(400).send("Something went wrong: " + err.message);
+    res.status(400).json({ message: "Something went wrong: " + err.message });
   }
 });
 
