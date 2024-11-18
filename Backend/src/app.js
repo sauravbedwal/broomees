@@ -4,14 +4,9 @@ const cors = require("cors");
 const connectDB = require("./config/database");
 
 const User = require("./Models/user");
+const bcrypt = require("bcrypt");
 
-// app.use(
-//   cors({
-//     origin: "https://broomees-ji3x.vercel.app",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
+const validator = require("validator");
 
 app.use(
   cors({
@@ -19,44 +14,11 @@ app.use(
   })
 );
 
-// {
-//   origin: (origin, callback) => {
-//     if (origin && origin.includes("broomees")) {
-//       callback(null, true); // Allow this origin
-//     } else {
-//       callback(new Error("Not allowed by CORS")); // Reject others
-//     }
-//   },
-//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//   credentials: true, // Enable if using cookies or Authorization headers
-// }
-
-// app.use((req, res, next) => {
-//   console.log(`CORS Debug: ${req.method} ${req.path}`);
-//   console.log("Headers Sent:", res.getHeaders());
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   next();
-// });
-
 app.use(express.json());
-
-const bcrypt = require("bcrypt");
-
-const validator = require("validator");
-
-app.get("/", (req, res) => {
-  res.json("Hello");
-});
 
 app.post("/api/signup", async (req, res) => {
   try {
-    // console.log(req.body);
+    console.log(req.body);
     const { firstName, lastName, email, userName, password } = req.body;
 
     if (!firstName || !lastName || !email || !userName || !password) {
@@ -88,7 +50,40 @@ app.post("/api/signup", async (req, res) => {
     res.json({ message: "User added successfully" });
   } catch (err) {
     console.log(err.message);
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(500).json({ message: "Something went wrong", err: err.message });
+  }
+});
+
+app.post("/api/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log("Received data:", { email, password });
+
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      throw new Error("Invalid credentials");
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (isPasswordValid) {
+      res.send("Logged in successfully!");
+    } else {
+      throw new Error("Invalid credentials");
+    }
+  } catch (err) {
+    res.status(400).send("ERROR: " + err.message);
+  }
+});
+
+app.post("/api/logout", (req, res) => {
+  try {
+    // If no session or token is being tracked, simply return a success response
+    console.log("User logged out successfully");
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (err) {
+    console.error("Error during logout:", err.message);
+    res.status(500).json({ message: "Something went wrong during logout" });
   }
 });
 
@@ -112,8 +107,8 @@ app.get("/api/user", async (req, res) => {
 connectDB()
   .then(() => {
     console.log("Database connected");
-    app.listen(3000, () => {
-      console.log("Server is running on port 3000");
+    app.listen(7777, () => {
+      console.log("Server is running on port 7777");
     });
   })
   .catch((err) => {
