@@ -73,12 +73,14 @@ body {
 
 h2 {
     color: #5e42ff;
-    font-size: 1.5rem;
-    margin: 0 0 10px;
+    font-size: 2rem;
+    margin: 0 0 0;
 }
 
 .rightSide p {
     color: #5e42ff;
+    font-weight: bold;
+    font-size: 0.8rem;
 }
 
 form {
