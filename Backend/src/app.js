@@ -1,43 +1,48 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (origin && origin.includes("broomees")) {
-        callback(null, true); // Allow this origin
-      } else {
-        callback(new Error("Not allowed by CORS")); // Reject others
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true, // Enable if using cookies or Authorization headers
-  })
-);
-
-app.use((req, res, next) => {
-  console.log(`CORS Debug: ${req.method} ${req.path}`);
-  console.log("Headers Sent:", res.getHeaders());
-  next();
-});
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
-
-// {
-//   origin: "https://broomees-ji3x.vercel.app",
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   allowedHeaders: ["Content-Type", "Authorization"],
-// }
 const connectDB = require("./config/database");
 
 const User = require("./Models/user");
 
+app.use(
+  cors({
+    origin: "https://broomees-ji3x.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+// {
+//   origin: (origin, callback) => {
+//     if (origin && origin.includes("broomees")) {
+//       callback(null, true); // Allow this origin
+//     } else {
+//       callback(new Error("Not allowed by CORS")); // Reject others
+//     }
+//   },
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   credentials: true, // Enable if using cookies or Authorization headers
+// }
+
+// app.use((req, res, next) => {
+//   console.log(`CORS Debug: ${req.method} ${req.path}`);
+//   console.log("Headers Sent:", res.getHeaders());
+//   next();
+// });
+
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   next();
+// });
+
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.json("Hello");
+});
 
 app.post("/signup", async (req, res) => {
   try {
@@ -82,16 +87,12 @@ app.get("/user", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.json({ message: "API is working!" });
-});
-
-app.use("/", (err, req, res, next) => {
-  if (err) {
-    console.log(err.message);
-    res.status(500).json({ message: "Something went wrong" });
-  }
-});
+// app.use("/", (err, req, res, next) => {
+//   if (err) {
+//     console.log(err.message);
+//     res.status(500).json({ message: "Something went wrong" });
+//   }
+// });
 
 connectDB()
   .then(() => {
