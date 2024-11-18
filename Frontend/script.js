@@ -21,7 +21,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
   // console.log("formData", formData);
   try {
     const response = await fetch(
-      "https://broomees-y6z2-mern-api.vercel.app/signup",
+      "https://broomees-y6z2-mern-api.vercel.app/api/signup",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -44,7 +44,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
 async function fetchUsers() {
   try {
     const response = await fetch(
-      "https://broomees-y6z2-mern-api.vercel.app/user"
+      "https://broomees-y6z2-mern-api.vercel.app/api/user"
     );
     const users = await response.json();
     console.log("Users:", users);
