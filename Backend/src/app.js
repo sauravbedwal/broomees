@@ -1,8 +1,32 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://broomees-ji3x.vercel.app"], // Specify allowed origins
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
+    credentials: true, // Allow cookies if needed
+  })
+);
 
+app.use((req, res, next) => {
+  console.log(`CORS Debug: ${req.method} ${req.path}`);
+  console.log("Headers Sent:", res.getHeaders());
+  next();
+});
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
+// {
+//   origin: "https://broomees-ji3x.vercel.app",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+// }
 const connectDB = require("./config/database");
 
 const User = require("./Models/user");
@@ -31,22 +55,35 @@ app.post("/signup", async (req, res) => {
     res.json({ message: "User added successfully" });
   } catch (err) {
     console.log(err.message);
-    res.status(500).json({ message: "Something went wrong: " + err.message });
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
 
 app.get("/user", async (req, res) => {
   try {
+    console.log("Fetching Users...");
     const users = await User.find({});
 
     if (users.length === 0) {
-      res.status(404).json({ message: "No User found:  " + err.message });
+      console.log(err.message);
+      res.status(404).json({ message: "No User found" });
     } else {
       res.json(users);
     }
   } catch (err) {
     console.log(err.message);
-    res.status(400).json({ message: "Something went wrong: " + err.message });
+    res.status(400).json({ message: "Something went wrong" });
+  }
+});
+
+app.get("/", (req, res) => {
+  res.json({ message: "API is working!" });
+});
+
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    console.log(err.message);
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
 
