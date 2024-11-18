@@ -16,6 +16,7 @@ app.use(
 
 app.use(express.json());
 
+// POST - SIGNUP API
 app.post("/api/signup", async (req, res) => {
   try {
     console.log(req.body);
@@ -54,6 +55,7 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
+// POST - LOGIN API
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -76,9 +78,9 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+// POST - LOGOUT API
 app.post("/api/logout", (req, res) => {
   try {
-    // If no session or token is being tracked, simply return a success response
     console.log("User logged out successfully");
     res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
@@ -87,6 +89,7 @@ app.post("/api/logout", (req, res) => {
   }
 });
 
+// GET - USERS API
 app.get("/api/user", async (req, res) => {
   try {
     console.log("Fetching Users...");
