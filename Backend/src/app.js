@@ -3,9 +3,10 @@ const app = express();
 const cors = require("cors");
 app.use(cors(
   {
-    origin: ["https://broomees-n9ma.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true
+    origin: "https://broomees-n9ma.vercel.app",
+    methods: "POST, GET, PUT, PATCH, DELETE",
+    credentials: true,
+    allowedHeaders: "Content-Type,Authorization", 
   }
 ));
 
