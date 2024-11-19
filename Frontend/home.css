@@ -11,7 +11,7 @@ body, html {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #95c28f;
     padding: 20px;
     text-align: center;
 }
@@ -56,16 +56,42 @@ h3 {
     padding: 0;
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
     text-align: left;
+    background-color: #559c92;
 }
 
 #users-list li {
-    background-color: #fff;
+    background-color: bisque;
     color: #333;
-    padding: 10px 15px;
-    margin: 5px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#users-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#users-list li::before {
+    content: "👤";
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#users-list li span {
+    font-weight: bold;
+    color: #007bff;
+}
+
+#users-list li small {
+    font-size: 14px;
+    color: #888;
 }
