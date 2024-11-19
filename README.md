@@ -2,6 +2,8 @@
 
 A simple user management system that includes a **Signup**, **Login**, and **Logout** functionality, developed using **HTML**, **CSS**, **JavaScript**, **Node.js**, and **MongoDB**. This project uses **REST APIs** for backend operations and a dynamic frontend for a seamless user experience.
 
+---
+
 ## **Features**
 
 1. **Signup Page**:
@@ -61,7 +63,7 @@ A simple user management system that includes a **Signup**, **Login**, and **Log
 ## **How It Works**
 
 1. **Signup**:
-   - A new user enters their details (name, email, and password) on the Signup Page.
+   - A new user enters their details (firstName, lastName, email, userName and password) on the Signup Page.
    - The data is validated on the frontend.
    - A `POST` request is sent to the `/api/signup` endpoint.
    - After successful signup, the user is redirected to the Home Page.
@@ -81,57 +83,3 @@ A simple user management system that includes a **Signup**, **Login**, and **Log
    - Logs out the current user by invalidating their session.
    - Redirects to the Login Page.
 
----
-
-## **Project Structure**
-
-```
-|-- /assets          # Static files like images, CSS, and JavaScript
-|-- /backend         # Node.js backend files
-    |-- index.js     # Entry point for the server
-    |-- routes/      # API route handlers
-|-- /frontend        # Frontend files
-    |-- index.html   # Signup Page
-    |-- login.html   # Login Page
-    |-- home.html    # Home Page
-|-- /db              # MongoDB connection and models
-|-- README.md        # Project documentation
-```
-
----
-
-## **Setup Instructions**
-
-1. Clone the repository:
-   ```bash
-   git clone <repository_url>
-   cd <repository_directory>
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Set up the database:
-   - Install and configure MongoDB locally or use a hosted solution like MongoDB Atlas.
-   - Update the MongoDB connection string in your backend configuration.
-
-4. Run the backend server:
-   ```bash
-   node index.js
-   ```
-
-5. Open the frontend files (`index.html`) in a browser to start the application.
-
----
-
-## **Future Enhancements**
-
-- Add authentication using **JWT**.
-- Enhance the user interface with frameworks like **Bootstrap** or **Material UI**.
-- Implement session management for better security.
-
----
-
-Let me know if you need further refinements or additional details!
