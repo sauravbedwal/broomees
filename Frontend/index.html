@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BROOMEES</title>
+    <title>BROOMEES - Signup</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,27 +16,33 @@
             <div class="leftbox-text">
                 <h1>Altitude Air</h1>
                 <p>We promise to ensure that your well-being is taken care of while traveling with us. Boasting
-                    top-in-class fleet inventory and a 5 star approval for our in-flight experience, you know you’re
+                    top-in-class fleet inventory and a 5-star approval for our in-flight experience, you know you're
                     getting the best from Altitude with no attitude.</p>
             </div>
         </div>
 
         <!-- Right Section -->
         <div class="rightSide">
-            <button class="signIn">Sign In</button>
             <h2>Explore & Experience</h2>
             <p>Get onto your most comfortable journey yet. All the way up.</p>
             <form id="signup-form">
                 <div class="firstName-lastName">
-                    <input type="text" id="first-name" placeholder="First Name" required>
-                    <input type="text" id="last-name" placeholder="Last Name" required>
+                    <input type="text" id="signup-first-name" placeholder="First Name" required>
+                    <span class="error" id="signup-first-name-error"></span>
+                    <input type="text" id="signup-last-name" placeholder="Last Name" required>
+                    <span class="error" id="signup-last-name-error"></span>
                 </div>
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <span class="error" id="signup-email-error"></span>
+                <input type="text" id="signup-username" placeholder="Username" required>
+                <span class="error" id="signup-username-error"></span>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <span class="error" id="signup-password-error"></span>
+                <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
+                <span class="error" id="signup-confirm-password-error"></span>
                 <button type="submit" class="submit-btn">Get Started</button>
             </form>
+            <p class="login-link">Already have an account? <a href="login.html">Log in here</a></p>
         </div>
     </div>
     <script src="script.js"></script>

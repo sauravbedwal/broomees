@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BROOMEES - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="leftSide">
+            <img src="./assets/airplane.webp" alt="Airplane" class="backgroundImage">
+            <div class="leftbox-text">
+                <h1>Altitude Air</h1>
+                <p>Welcome back! Please login to continue exploring the journey with us.</p>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="rightSide">
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Email" required>
+                <span class="error" id="email-error"></span>
+                <input type="password" id="password" placeholder="Password" required>
+                <span class="error" id="password-error"></span>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="index.html">Sign up here</a></p>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+
+</html>

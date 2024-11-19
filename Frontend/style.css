@@ -1,6 +1,8 @@
 
 body {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
 
@@ -74,7 +76,7 @@ body {
 h2 {
     color: #5e42ff;
     font-size: 2rem;
-    margin: 0 0 0;
+    margin: 0 0 10px;
 }
 
 .rightSide p {
@@ -112,6 +114,27 @@ input {
     cursor: pointer;
     font-weight: bold;
 }
+.error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: -15px;
+}
+
+#users-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+#users-list li {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #f8f9fd;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
 
 @media (max-width: 1024px) {
     .container {
@@ -214,5 +237,3 @@ input {
         padding: 10px;
     }
 }
-/* asas */
-/* asasas */
